@@ -39,10 +39,7 @@ public class AStarState
      * with the minimum total cost.  If there are no open waypoints, this method
      * returns <code>null</code>.
      **/
-    public Waypoint getMinOpenWaypoint()
-    {
-        // TODO:  Implement.
-
+    public Waypoint getMinOpenWaypoint() {
         Waypoint minWP = open.values().iterator().next();
 
         for (Waypoint wp : open.values()){
@@ -62,26 +59,14 @@ public class AStarState
      * if</em> the new waypoint's "previous cost" value is less than the current
      * waypoint's "previous cost" value.
      **/
-    public boolean addOpenWaypoint(Waypoint newWP)
-    {
-        boolean already_there = false;
-        Location location = null;
-
-        for (Location loc : open.keySet()){
-            if (loc.equals(newWP.getLocation())) {
-                already_there = true;
-                location = loc;
-            }
-        }
-
-
-        if (!already_there){
+    public boolean addOpenWaypoint(Waypoint newWP) {
+        if (!open.containsKey(newWP.getLocation())){
             open.put(newWP.getLocation(), newWP);
             return true;
         }
 
         else {
-            if (newWP.getPreviousCost() < open.get(location).getPreviousCost()){
+            if (newWP.getPreviousCost() < open.get(newWP.getLocation()).getPreviousCost()){
                 open.put(newWP.getLocation(), newWP);
                 return true;
             }
@@ -92,9 +77,7 @@ public class AStarState
 
 
     /** Returns the current number of open waypoints. **/
-    public int numOpenWaypoints()
-    {
-
+    public int numOpenWaypoints() {
         return open.size();
     }
 
@@ -103,26 +86,17 @@ public class AStarState
      * This method moves the waypoint at the specified location from the
      * open list to the closed list.
      **/
-    public void closeWaypoint(Location loc)
-    {
+    public void closeWaypoint(Location loc) {
         closed.put(loc, null);
         open.remove(loc);
-        // TODO:  Implement.
     }
 
     /**
      * Returns true if the collection of closed waypoints contains a waypoint
      * for the specified location.
      **/
-    public boolean isLocationClosed(Location loc)
-    {
-        for (Location l : closed.keySet()){
-            if (l.equals(loc)){
-                return true;
-            }
-        }
-
-        return false;
+    public boolean isLocationClosed(Location loc) {
+        return closed.containsKey(loc);
     }
 }
 
