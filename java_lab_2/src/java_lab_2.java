@@ -1,43 +1,19 @@
+import java.util.Scanner;
 
-public class java_lab_2 {
+public class Lab2 {
     public static void main(String[] args) {
-        // Point2d
+        Scanner in = new Scanner(System.in);
+        Point3d p1 = new Point3d(in.nextDouble(), in.nextDouble(), in.nextDouble());
+        Point3d p2 = new Point3d(in.nextDouble(), in.nextDouble(), in.nextDouble());
+        Point3d p3 = new Point3d(in.nextDouble(), in.nextDouble(), in.nextDouble());
+        System.out.println(computeArea(p1, p2, p3));
 
-        // initializing
-        Point2d a2 = new Point2d();
-        Point2d b2 = new Point2d(0, 0);
-        Point2d c2 = new Point2d(5.3, 6.7);
-
-        // comparing
-        System.out.println(a2 == b2);
-        System.out.println(a2.equals(b2));
-        System.out.println(a2.equals(c2));
-
-        // methods testing
-        a2.setX(5.3);
-        System.out.println(a2.getX());
-        a2.setY(6.7);
-        System.out.println(a2.getX());
-        System.out.println(a2.equals(c2));
-
-        System.out.println("\n");
-
-        // Point3d
-
-        // initializing
-        Point3d a3 = new Point3d();
-        Point3d b3 = new Point3d(0, 0, 0);
-        Point3d c3 = new Point3d(1, 2, 3);
-
-        // comparing
-        System.out.println(a3 == b3);
-        System.out.println(a3.equals(b3));
-        System.out.println(a3.equals(c3));
-
-        // distanceTo test
-        Point3d pa = new Point3d();
-        Point3d pb = new Point3d(1,1,1);
-        System.out.println(pa.distanceTo(pb));
-
+    }
+    public static double computeArea(Point3d p1, Point3d p2, Point3d p3){
+        double a = p1.distanceTo(p2);
+        double b = p1.distanceTo(p3);
+        double c = p2.distanceTo(p3);
+        double p = p1.distanceTo(p2) + p1.distanceTo(p3) + p2.distanceTo(p3);
+        return Math.sqrt(p*(p-a)*(p-b)*(p-c));
     }
 }
