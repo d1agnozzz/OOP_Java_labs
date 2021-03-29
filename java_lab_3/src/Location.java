@@ -24,9 +24,21 @@ public class Location
         this(0, 0);
     }
 
-    public boolean equals(Location location){
-        return (this.xCoord == location.xCoord && this.yCoord == location.yCoord);
+//    public boolean equals(Location location){
+//        return (this.xCoord == location.xCoord && this.yCoord == location.yCoord);
+//    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (!(obj instanceof Location)) return false;
+        if (this == obj) return true;
+
+        Location location = (Location)obj;
+        return (this.xCoord == location.xCoord &&
+                this.yCoord == location.yCoord);
     }
+
+    @Override
     public int hashCode(){
         return xCoord * 31 + yCoord;
     }
