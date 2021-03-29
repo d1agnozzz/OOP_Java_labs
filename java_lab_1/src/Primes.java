@@ -8,7 +8,7 @@ public class Primes{
     }
 
     public static boolean isPrime(int n){ // проверка числа на простоту
-        for (int i = 2; i <= Math.sqrt(n); i++){
+        for (int i = 2; i < n; i++){
             if (n%i==0){
                 return false;
             }

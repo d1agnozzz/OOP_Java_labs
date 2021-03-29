@@ -1,11 +1,10 @@
 public class Palindrome {
     public static void main(String[] args){
-        String s = "";
         for (int i = 0; i < args.length; i++){
-            s = args[i];
-            System.out.println(isPalindrome(s));
+            System.out.println(isPalindrome(args[i]));
         }
     }
+
     public static String revrseString(String origin){
         String reversed = "";
         for (int i = 0; i<origin.length(); i++){
