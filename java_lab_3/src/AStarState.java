@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * This class stores the basic state necessary for the A* algorithm to compute a
  * path across a map.  This state includes a collection of "open waypoints" and
@@ -9,6 +11,10 @@ public class AStarState
 {
     /** This is a reference to the map that the A* algorithm is navigating. **/
     private Map2D map;
+
+    private HashMap<Location, Waypoint> open = new HashMap<>();
+    private HashMap<Location, Waypoint> closed = new HashMap<>();
+
 
 
     /**
@@ -36,7 +42,15 @@ public class AStarState
     public Waypoint getMinOpenWaypoint()
     {
         // TODO:  Implement.
-        return null;
+
+        Waypoint minWP = open.values().iterator().next();
+
+        for (Waypoint wp : open.values()){
+            if (wp.getTotalCost() < minWP.getTotalCost())
+                minWP = wp;
+        }
+
+        return minWP;
     }
 
     /**
@@ -50,7 +64,29 @@ public class AStarState
      **/
     public boolean addOpenWaypoint(Waypoint newWP)
     {
-        // TODO:  Implement.
+        boolean already_there = false;
+        Location location = null;
+
+        for (Location loc : open.keySet()){
+            if (loc.equals(newWP.getLocation())) {
+                already_there = true;
+                location = loc;
+            }
+        }
+
+
+        if (!already_there){
+            open.put(newWP.getLocation(), newWP);
+            return true;
+        }
+
+        else {
+            if (newWP.getPreviousCost() < open.get(location).getPreviousCost()){
+                open.put(newWP.getLocation(), newWP);
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -58,8 +94,8 @@ public class AStarState
     /** Returns the current number of open waypoints. **/
     public int numOpenWaypoints()
     {
-        // TODO:  Implement.
-        return 0;
+
+        return open.size();
     }
 
 
@@ -69,6 +105,8 @@ public class AStarState
      **/
     public void closeWaypoint(Location loc)
     {
+        closed.put(loc, null);
+        open.remove(loc);
         // TODO:  Implement.
     }
 
@@ -78,7 +116,12 @@ public class AStarState
      **/
     public boolean isLocationClosed(Location loc)
     {
-        // TODO:  Implement.
+        for (Location l : closed.keySet()){
+            if (l.equals(loc)){
+                return true;
+            }
+        }
+
         return false;
     }
 }
