@@ -40,13 +40,16 @@ public class AStarState
      * returns <code>null</code>.
      **/
     public Waypoint getMinOpenWaypoint() {
+        // minWP -- ссылка на Waypoint с минимальной общей стоимостью
         Waypoint minWP = open.values().iterator().next();
 
+        // проходим по всем элементам и в minWP кладем минимальную
         for (Waypoint wp : open.values()){
             if (wp.getTotalCost() < minWP.getTotalCost())
                 minWP = wp;
         }
 
+        // возвращаем ссылку на точку с минимальной общей стоимостью (minWP)
         return minWP;
     }
 
@@ -59,13 +62,16 @@ public class AStarState
      * if</em> the new waypoint's "previous cost" value is less than the current
      * waypoint's "previous cost" value.
      **/
+
     public boolean addOpenWaypoint(Waypoint newWP) {
+        // если точки в этом месте еще нет -- добавляем
         if (!open.containsKey(newWP.getLocation())){
             open.put(newWP.getLocation(), newWP);
             return true;
         }
 
         else {
+            // если стоимтость новой точки меньше стоимости старой -- заменяем старую новой
             if (newWP.getPreviousCost() < open.get(newWP.getLocation()).getPreviousCost()){
                 open.put(newWP.getLocation(), newWP);
                 return true;
@@ -87,7 +93,9 @@ public class AStarState
      * open list to the closed list.
      **/
     public void closeWaypoint(Location loc) {
+        //кладем в закрытые
         closed.put(loc, null);
+        // удаляем из открытых
         open.remove(loc);
     }
 
@@ -96,6 +104,7 @@ public class AStarState
      * for the specified location.
      **/
     public boolean isLocationClosed(Location loc) {
+        // есть ли такая локация в закрытых точках
         return closed.containsKey(loc);
     }
 }
