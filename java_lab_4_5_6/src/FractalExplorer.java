@@ -59,13 +59,15 @@ public class FractalExplorer {
 //                else { // Black and white, only set
 //                    display.drawPixel(x, y, Color.WHITE.getRGB());
 //                }
-                display.repaint();
+
             }
         }
+        display.repaint();
     }
 
     class ButtonResetEventListener implements ActionListener {
         /* Reset range ans redraw */
+        @Override
         public void actionPerformed(ActionEvent e){
             fractalGenerator.getInitialRange(range);
             drawFractal();
@@ -73,6 +75,7 @@ public class FractalExplorer {
     }
 
     class MouseButtonClicked implements MouseListener {
+        @Override
         public void mouseClicked(MouseEvent e) {
             /* Translate screen coordinates */
             double xCoord = FractalGenerator.getCoord(range.x, range.x+range.width, width, e.getX());
@@ -82,13 +85,13 @@ public class FractalExplorer {
             /* Redraw */
             drawFractal();
         }
-        public void mousePressed(MouseEvent e){};
+        public void mousePressed(MouseEvent e){}
 
-        public void mouseReleased(MouseEvent e){};
+        public void mouseReleased(MouseEvent e){}
 
-        public void mouseEntered(MouseEvent e){};
+        public void mouseEntered(MouseEvent e){}
 
-        public void mouseExited(MouseEvent e){};
+        public void mouseExited(MouseEvent e){}
     }
 
     public static void main(String[] args){

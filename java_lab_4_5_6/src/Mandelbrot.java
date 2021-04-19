@@ -1,7 +1,6 @@
 import java.awt.geom.Rectangle2D;
 
-class Mandelbrot extends FractalGenerator{
-
+class Mandelbrot extends FractalGenerator {
 
 
     @Override
@@ -14,11 +13,14 @@ class Mandelbrot extends FractalGenerator{
 
     @Override
     public int numIterations(double x, double y) {
-        ComplexNumber c = new ComplexNumber(x, y);
-        ComplexNumber z = new ComplexNumber(0,0);
+        ComplexNumber c;
+        c = new ComplexNumber(x, y);
+        //c = new ComplexNumber(x, y);
+        ComplexNumber z = new ComplexNumber(0, 0);
         int counter = 0;
 
-        while (z.getSqrModule() < 4 && counter < MAX_ITERATIONS){
+        while (z.getSqrModule() < 8 && counter < MAX_ITERATIONS) {
+          //  z = z.conjugate();
             z = z.mult(z);
             z = z.plus(c);
             counter++;

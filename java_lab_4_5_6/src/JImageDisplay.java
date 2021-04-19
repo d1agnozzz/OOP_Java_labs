@@ -16,6 +16,8 @@ class JImageDisplay extends javax.swing.JComponent {
         g.drawImage(bufferedImage, 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), null);
     }
 
+
+
     /* Clear image (set all pixels black) */
     public void clearImage(){
         for (int x = 0; x <  bufferedImage.getWidth(); x++){

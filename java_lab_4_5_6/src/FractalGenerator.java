@@ -23,7 +23,7 @@ public abstract class FractalGenerator {
      *        The coordinate should fall in the range [0, size].
      */
 
-    public static final int MAX_ITERATIONS = 1500;
+    public static final int MAX_ITERATIONS = 2000;
 
     public static double getCoord(double rangeMin, double rangeMax,
         int size, int coord) {
