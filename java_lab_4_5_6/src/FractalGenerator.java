@@ -23,7 +23,7 @@ public abstract class FractalGenerator {
      *        The coordinate should fall in the range [0, size].
      */
 
-    public static final int MAX_ITERATIONS = 2000;
+    public static final int MAX_ITERATIONS = 500;
 
     public static double getCoord(double rangeMin, double rangeMax,
         int size, int coord) {
@@ -40,6 +40,8 @@ public abstract class FractalGenerator {
      * Sets the specified rectangle to contain the initial range suitable for
      * the fractal being generated.
      */
+
+    // настройка самой интересной области плоскости
     public abstract void getInitialRange(Rectangle2D.Double range);
 
 
@@ -47,6 +49,8 @@ public abstract class FractalGenerator {
      * Updates the current range to be centered at the specified coordinates,
      * and to be zoomed in or out by the specified scaling factor.
      */
+
+    // переместить центр и увеличить
     public void recenterAndZoomRange(Rectangle2D.Double range,
         double centerX, double centerY, double scale) {
 
@@ -67,6 +71,8 @@ public abstract class FractalGenerator {
      * doesn't escape before the iteration limit is reached is indicated
      * with a result of -1.
      */
+
+    // метод расчета итераций
     public abstract int numIterations(double x, double y);
 }
 
