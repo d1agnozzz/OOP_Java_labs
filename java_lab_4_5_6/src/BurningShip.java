@@ -1,14 +1,15 @@
 import java.awt.geom.Rectangle2D;
+import static java.lang.Math.abs;
 
-class Mandelbrot extends FractalGenerator {
+public class BurningShip extends FractalGenerator {
 
 
     @Override
     public void getInitialRange(Rectangle2D.Double range) {
         range.x = -2;
-        range.y = -1.5;
-        range.width = 3;
-        range.height = 3;
+        range.y = -2.5;
+        range.width = 4;
+        range.height = 4;
     }
 
     @Override
@@ -20,7 +21,7 @@ class Mandelbrot extends FractalGenerator {
         int counter = 0;
 
         while (z.getSqrModule() < 8 && counter < MAX_ITERATIONS) {
-          //  z = z.conjugate();
+            z = new ComplexNumber(abs(z.re), abs(z.im));
             z = z.mult(z);
             z = z.plus(c);
             counter++;
@@ -33,6 +34,6 @@ class Mandelbrot extends FractalGenerator {
 
     @Override
     public String toString() {
-        return "Mandelbrot";
+        return "Burning Ship";
     }
 }

@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 
 class JImageDisplay extends javax.swing.JComponent {
-    private BufferedImage bufferedImage;
+    public BufferedImage bufferedImage;
     public JImageDisplay(int width, int height){
         bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         super.setPreferredSize(new java.awt.Dimension(width, height));
