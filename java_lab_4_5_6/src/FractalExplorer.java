@@ -4,6 +4,7 @@ import javax.swing.filechooser.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
+import java.io.File;
 import java.io.IOException;
 
 public class FractalExplorer {
@@ -43,6 +44,7 @@ public class FractalExplorer {
         comboBox.addItem(new Mandelbrot());
         comboBox.addItem(new Tricorn());
         comboBox.addItem(new BurningShip());
+        comboBox.setSelectedIndex(0);
         comboBox.addActionListener(new EventListener());
 
         // create panel for Label and ComboBox
@@ -91,14 +93,20 @@ public class FractalExplorer {
             } else if (e.getSource() == btnSave) {
                 JFileChooser fdialog = new JFileChooser();
 
-                FileFilter filter = new FileNameExtensionFilter("PNG Images", "png");
+                FileFilter filter = new FileNameExtensionFilter("PNG Images", ".png");
                 fdialog.setFileFilter(filter);
                 fdialog.setAcceptAllFileFilterUsed(false);
 
 
                 if (fdialog.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    File directory = fdialog.getSelectedFile();
+
+                    if (!directory.toString().endsWith(".png")){ // Checking file extension
+                        directory = new File(directory + ".png");
+                    }
+
                     try {
-                        ImageIO.write(display.bufferedImage, "png", fdialog.getSelectedFile());
+                        ImageIO.write(display.bufferedImage, "png", directory);
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                         JOptionPane.showMessageDialog(fdialog, ioException.getMessage(), "Can't save file ;(", JOptionPane.ERROR_MESSAGE);
@@ -137,7 +145,7 @@ public class FractalExplorer {
                         if (numIters == -1)
                             display.drawPixel(x, y, Color.BLACK.getRGB());
                         else {
-                            float hue = 0.7f + (float) numIters / 360f;
+                            float hue =  + (float) numIters / 360f;
                             int rgbColor = Color.HSBtoRGB(hue, 1f, 1f);
                             display.drawPixel(x, y, rgbColor);
                         }
